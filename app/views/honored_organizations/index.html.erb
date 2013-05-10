@@ -1,0 +1,48 @@
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="unstyled listBorder">
+			<li><%= link_to "Add Organization", 
+				new_honored_organization_path(honored_id: @honored.id),
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "Back to honored account", honored_path(@honored),
+				class: "btn btn-success btn-block" %></li>
+			<li>
+          		<%= link_to "Dashboard", dashboard_path,
+            		class: "btn btn-success btn-block" %>
+        	</li>
+		</ul>
+	</div>
+	<div class="span7">
+		<h1>Organizations - <%= @honored.first_name + " " + @honored.last_name %></h1>
+		<p>These are the organizations added to your account.</p>
+		<ul class="unstyled">
+			<% if !@honored_organization_detail_array.blank? %>
+				<% for honored_organization_detail in @honored_organization_detail_array %>
+					<li>
+						<ul class="unstyled listBorder">
+							<li>
+								<%= honored_organization_detail[:organization_name] %>
+							</li>
+							<li class="text-right">
+								<%= link_to "Delete", 
+									honored_organization_path(
+									id: honored_organization_detail[:honored_organization],
+									honored_id: @honored.id), 
+									method: :delete,
+									class: "btn btn-warning btn-small" %>
+							</li>
+						</ul>
+					</li>
+				<% end %>
+			<% else %>
+				<p class="listBorder">
+					There are not any organizations added the honored's account.
+					You can add one here.
+				</p>
+				<%= link_to "Add organization", 
+				new_honored_organization_path(honored_id: @honored.id),
+				class: 'btn btn-success' %>
+			<% end %>
+		</ul>
+	</div>
+</div>

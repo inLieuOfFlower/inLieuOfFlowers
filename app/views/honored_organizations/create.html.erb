@@ -1,0 +1,19 @@
+<div class="row-fluid">
+		<div class="span3">
+		<ul class="unstyled">
+			<li><%= link_to "Dashboard", dashboard_path,
+				class: 'btn btn-success btn-block' %></li>
+			<li><%= link_to "To Honored", honored_path(id: @honored.id),
+				class: 'btn btn-success btn-block' %></li>
+		</ul>
+	</div>
+	<div class="span7">
+		<h1>Organizations added</h1>
+		<p>Below is the current list of organizations added to the honored.</p>
+		<ul class="unstyled">
+			<% for names in @organization_names %>
+				<li><%= names %></li>
+			<% end %> 
+		</ul>
+	</div>
+</div>

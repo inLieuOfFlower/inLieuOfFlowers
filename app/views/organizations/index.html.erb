@@ -1,0 +1,50 @@
+<div class="row-fluid">
+  <div class="span3">
+    <div class="row-fluid">
+      <%= form_tag organizations_path, method: :get, class: "form-search" do %>
+        <ul class="unstyled listBorder">
+          <li>
+            <%= text_field_tag :search, params[:search], 
+              class: "input-medium search-query", placeholder: "organization name" %>
+          </li>
+          <li>
+            <%= submit_tag "Search", :name => nil, class: "btn btn-info btn-small" %>
+          </li>
+        </p>
+      <% end %>
+    </div>
+    <div class="row-fluid">
+      <ul class="unstyled listBorder">
+        <li>
+          <%= link_to "Add Organization", new_organization_path, 
+            class: "btn btn-success btn-block" %>
+        </li>
+        <li>
+          <%= link_to "Dashboard", dashboard_path,
+            class: "btn btn-success btn-block" %>
+        </li>
+        <li>
+          <%= link_to "View Honoreds", honoreds_path,
+            class: "btn btn-success btn-block" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+	<div class="span8"> 
+    <% if defined?(@organization) && !@organization.empty? %>
+      <h3>Organization Names</h3>
+      <p>
+        This is a list of the organization listed within the system.
+        Click one to view the details.
+      </p>
+		  <ul class="unstyled listBorder">
+  			 <% for organization in @organization %>
+ 				   <li><%= link_to organization.name, organization %></li>
+  			 <% end %>
+		  </ul>
+		  <%= will_paginate @organization, :renderer => BootstrapPagination::Rails %>
+    <% else %>
+      <p>No results found. </p>
+    <% end %>
+	</div>
+</div>

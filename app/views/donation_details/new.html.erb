@@ -1,0 +1,42 @@
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="unstyled">
+			<li><%= link_to "Dashboard", dashboard_path,
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "Back to Honored", honored_path(@honored.id),
+				class: "btn btn-success btn-block" %></li>
+		</ul>
+	</div>
+	<div class="span7">
+		<h3>Donation Detail</h3>
+		<% if @organization_report.blank? %>
+			<p>There are not any organizations registered for this honored at
+			   this time. Organizations will be added soon. Please check back.
+			</p>
+		<% else %>
+		<p>
+			Please enter donation amount.
+		</p>
+			<%= form_for @donation_detail,
+				:html => { :class => 'form-horizontal'} do |f| %>
+				<% @organization_report.each do |report| %>
+					<%= f.hidden_field :donation_id, value: @donation_id %>
+					<%= f.hidden_field :honored_id, value: @honored.id %>
+				<div class="control-group">					
+						<%= f.label report[:organization_name], class: "control-label" %>
+						<div class="controls input-prepend">
+							<span class= "add-on">$</span>
+							<%= f.text_field :amount, index: report[:organization_id],
+								organization_id: report[:organization_id] %>
+						</div>
+					</div>
+				<% end %>
+				<div class="control-group">
+					<div class="controls">
+						<%= f.submit "Make Donation", class: "btn btn-success sapn2" %>
+					</div>
+				</div>
+			<% end %>
+		<%end%>				
+	</div>
+</div>

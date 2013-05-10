@@ -1,0 +1,87 @@
+<div>
+<div class="row-fliud">
+	<div class="span3 listBorder">
+		<ul class="unstyled">
+			<li>
+				<%= link_to "Add a loved one", new_honored_path, 
+					class: 'btn btn-success btn-block' %>
+			</li>
+			<li>
+				<%= link_to "Make a donation", honoreds_path, 
+					class: 'btn btn-success btn-block' %>
+			</li>
+			<li>
+				<%= link_to "Register an organization", new_organization_path, 
+					class: 'btn btn-success btn-block' %>
+			</li>
+			<li>
+				<%= link_to "View Organizations", organizations_path,
+					class: "btn btn-success btn-block" %>
+			</li>
+			<li>
+				<%= link_to "View a list of honored", honoreds_path,
+					class: 'btn btn-success btn-block' %>
+			</li>
+			<li>
+				<%= link_to "View donations", donations_path,
+					class: "btn btn-success btn-block" %>
+			</li>
+		</ul>
+	</div>
+	<div class="span8">
+		<div class="fluid-row">
+			<div class="span3 listBorder">
+				<h3>Your Honored</h3>
+				<% if !defined?(@honored) || @honored.empty? %>
+					<p>
+						You currently do not have any honored registered at the moment.
+					</p>
+				<% else %>
+					<p>Click on name to view detail infomation</p>
+					<ul class='unstyled'>
+						<% for honored in @honored %>
+							<li>
+								<%= link_to(image_tag(honored.avatar.url(:thumb)),
+									honored_path(honored)) %>
+							</li>
+							<li>
+								<%= link_to honored.first_name+" "+honored.last_name, honored_path(honored) %>
+							</li>
+						<% end %>
+					</ul>
+				<% end %>
+			</div>
+			<div class="span3 listBorder">
+				<h3>Donations</h3>
+				<% if !@donation_reciept_array.blank? %>
+					<ul class="unstyled">
+						<% @donation_reciept_array.each do |donation_reciept| %>
+							<li>
+								<b>Donation id:</b>
+								<%= donation_reciept[:donation_id] %>
+							</li>
+							<li>
+								<b>Honored's Name:</b>
+								<%= donation_reciept[:honored_name] %>
+							</li>
+							<li>
+								<b>Date:</b>
+								<%= donation_reciept[:donation_date] %>
+							</li>
+							<li style="margin-bottom: 50px;">
+								<%= link_to "See Detail",donation_path(donation_reciept[:donation_id]) %>
+							</li>
+						<% end %>
+					</ul>
+				<% else %>
+					<p>
+						You currently do not have any donations for the
+						past 30 days.
+					</p>				
+				<% end %>
+			</div>
+		</div>		
+	</div>
+	<%= render 'main/newsBar' %>
+</div>
+<div>

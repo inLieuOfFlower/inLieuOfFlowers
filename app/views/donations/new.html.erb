@@ -1,0 +1,12 @@
+<div class="row-fluid">
+	<div class="span8 offset2">
+		<h3>Make Donation</h3>
+		<p>Thank you for your interest in making a donation to organizations
+		   that <%= @honored.first_name + " " + @honored.last_name %> supported.
+		   please click make donation to continue.
+		</p>
+		<%= link_to "Make Donation", 
+			donations_path(honored_id: @honored.id), 
+			method: :post, class: "btn btn-success btn-block" %>
+	</div>
+</div>

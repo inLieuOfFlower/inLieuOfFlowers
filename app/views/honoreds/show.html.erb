@@ -1,0 +1,79 @@
+<div class="row-fluid">
+<h1 class="offset3">
+Honored -
+<%= @honored.first_name + " " + @honored.last_name %>
+</h1>
+<% if flash[:notice] %>
+<p class="alert"><%= flash[:notice] %></p>
+<% end %>
+<div class="span3">
+<ul class="unstyled">
+<li>
+<%= link_to "View honored's organizations", honored_organizations_path(honored_id: @honored.id),
+class: 'btn btn-success btn-block' %>
+</li>
+<li>
+<%= link_to "Add organization to honored",
+new_honored_organization_path(honored_id: @honored.id),
+class: 'btn btn-success btn-block' %>
+</li>
+<li>
+<%= link_to "Add another loved one",
+new_honored_path, class: 'btn btn-success btn-block' %>
+</li>
+<li>
+<%= link_to "Dashboard", dashboard_path,
+class: "btn btn-success btn-block" %>
+</li>
+<li>
+	<%= link_to "Make Donation",
+donations_path(honored_id: @honored.id),
+method: :post, class: "btn btn-success btn-block" %>
+</li>
+<li>
+<%= link_to "All Honored", honoreds_path,
+class: "btn btn-success btn-block" %>
+</li>
+</ul>
+</div>
+<div class="span8">
+<ul class="unstyled">
+<li style="margin-bottom: 50px"><%= image_tag @honored.avatar.url(:medium) %></li>
+<li>
+<b>Name:</b>
+<%= @honored.first_name %> <%= @honored.last_name %>
+</li>
+<li>
+<b>Date of Birth:</b>
+<%= @honored.date_of_birth %>
+</li>
+<li><b>Date of Death:</b>
+<%= @honored.date_of_death %>
+</li>
+<li><b>City:</b>
+<%= @honored.city %>
+</li>
+<li>
+<b>State:</b>
+<%= @honored.state %>
+</li>
+<li>
+<b>Description:</b>
+<%= @honored.description %>
+</li>	
+</ul>
+<% if current_user.id == @honored.user_id %>
+<%= link_to "Edit",
+edit_honored_path(honored_id: @honored.id),
+class: 'btn btn-success btn-large' %>
+
+<%= link_to "Delete", @honored, method: :delete,
+class: "btn btn-danger btn-large",
+:data => { :confirm => "Are you sure?" } %>
+<% end %>
+
+<%= link_to "Make Donation",
+donations_path(honored_id: @honored.id),
+method: :post, class: "btn btn-success btn-large" %>
+</div>
+</div>

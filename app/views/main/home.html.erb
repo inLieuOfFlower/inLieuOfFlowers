@@ -1,0 +1,56 @@
+<div class="row-fluid">
+	<div class="span3 mystyle" >
+		<h3>Step 1</h3>
+		<div id="setup"></div>
+		<p class="steps">Setup an account.</p>
+		<p class="lead">
+			<%= link_to "Get Started Here", new_user_registration_path %>
+		</p>
+	</div>
+	<div class="span3 mystyle">
+		<h3>Step 2</h3>
+		<div id="user"></div>
+		<p class="steps">Create an account for your loved one.</p>
+	</div>
+	<div class="span3 mystyle">
+		<h3>Step 3</h3>
+		<div id="mail"></div>
+		<p class="steps">Tell us where you would like the donations to go.</p>
+	</div>
+	<div class="span3 mystyle">
+		<h3>Step 4</h3>
+		<div id="check"></div>
+		<p class="steps">We will take care of the rest.</p>
+	</div>
+	<% if !user_signed_in? %>
+		<div class="row-fluid" style="margin-top:50px">
+			<div class="span8 offset2">
+				<% if user_signed_in? %>
+					<%= link_to "Registered? Sign in", 
+						new_user_session_path,
+						class: "btn btn-block btn-info btn-large" %>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+	<div class="row-fluid" style="margin-top:50px">
+		<div class="span8 offset2">
+			<% if user_signed_in? %>
+				<%= link_to "Want to donate?", new_donation_path %>
+			<% else %>			
+				<%= link_to "Want to donate? Start here.", new_user_session_path,
+					class: 'btn btn-block btn-success btn-large' %>
+			<% end %>
+		</div>
+	</div>
+
+<%= render 'main/newsBar' %>
+
+<div class="row feed">
+	<div class="span4 feedBox">
+	</div>
+	<div class="span4 feedBox">
+	</div>
+	<div class="span4 feedBox">
+	</div>
+</div>

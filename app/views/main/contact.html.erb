@@ -1,0 +1,38 @@
+<div class="row">
+<div class="span6 offset3">
+
+<div class="contactus">
+<h1>Contact Us!</h1>
+
+
+
+<%= form_tag do %>
+
+
+<table border="0">
+<tr>
+<td><b label>First Name:</b label></td>
+<td><%= text_field_tag 'firstname' %></td>
+</tr>
+<tr>
+<td> <b label>Email: </b label></td>
+<td><%= email_field_tag 'email' %></td>
+</tr>
+<tr>
+<td><b label>Message: </b label></td>
+<td><%= text_area_tag 'message', nil, :rows =>10, :cols => 35 %> </td>
+</tr>
+<tr>
+<td></td>
+<td><%= submit_tag 'Contact Us' %></td>
+</tr>
+</table>
+
+
+
+
+<% end %>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,88 @@
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="unstyled listBorder">
+			<li><%= link_to "Dashboard", dashboard_path,
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "View Honoreds", honoreds_path,
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "View Organizations", organizations_path,
+				class: "btn btn-success btn-block" %></li>
+		</ul>
+	</div>
+	<div class="span8">
+		<h1>Edit Honored Account</h1>
+		<%= form_for(@honored, :html => { :class => 'form-horizontal listBorder', 
+			:multipart => true }) do |f| %>
+			<div class='control-group'>
+				<%= f.label :first_name, class: 'control-label' %>
+				<div class='controls'>
+					<%= f.text_field :first_name %>
+				</div>
+			</div>
+			<div class='control-group'>
+				<%= f.label :last_name, class: 'control-label' %>
+				<div class='controls'>
+					<%= f.text_field :last_name %>
+				</div>
+			</div>
+		<div class="mystyle" style="margin-bottom: 50px">
+			<h3>Important !</h3>
+			<p>
+				The following a optional information that will help others find you loved one.
+				Please don't enter information if you do not feel confortable letting others view it.
+			</p>
+		</div>
+		<div class='control-group'>
+			<%= f.label :date_of_birth, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.text_field :date_of_birth, class: 'datepicker' %>
+			</div>
+		</div>
+		<div class='control-group'>
+			<%= f.label :date_of_death, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.text_field :date_of_death, class: 'datepicker' %>
+			</div>
+		</div>
+		<div class='control-group'>
+			<%= f.label :city, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.text_field :city %>
+			</div>
+		</div>
+		<div class='control-group'>
+			<%= f.label :state, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.text_field :state, size: 2, maxlength: 2 %>
+			</div>
+		</div>
+		<div class='control-group'>
+			<%= f.label :description, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.text_area :description, rows: 5, width: 256 %>
+			</div>	
+			<small>Enter a brief (256 maximun characters) description of you loved one</small>		
+		</div>
+		<div class='control-group'>
+			<div class='controls'>
+				<%= image_tag @honored.avatar.url(:thumb) %>
+			</div>
+		</div>
+		<div class='control-group'>			
+			<%= f.label :avatar, class: 'control-label' %>
+			<div class='controls'>
+				<%= f.file_field :avatar %>
+			</div>
+		</div>
+		<div class='control-group'>
+			<div class='controls'>
+				<%= f.submit "Submit", class: "btn btn-primary" %>
+				<%= link_to "Delete", @honored, method: :delete, 
+					class: "btn btn-danger",
+					:data => { :confirm => "Are you sure?" } %>
+				<%= link_to "Cancel", @honored, class: "btn btn-warning" %>
+			</div>
+		</div>
+	<% end %>
+	</div>
+</div>

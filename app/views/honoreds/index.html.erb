@@ -1,0 +1,41 @@
+<div class="row-fluid">	
+	<div class="span3">
+		<ul class="unstyled listBorder">
+			<li><%= link_to "Dashboard", dashboard_path,
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "Create honored", new_honored_path,
+				class: "btn btn-success btn-block" %></li>
+			<li><%= link_to "View Organizations", organizations_path,
+				class: "btn btn-success btn-block" %></li>
+		</ul>
+	</div>
+	<div class="span8">
+		<% if !@honored.blank? %>
+			<h3>Honored</h3>
+			<% if flash[:notice] %>
+				<p class="alert"><%= flash[:notice] %></p>
+			<% end %>
+			<p>
+				Click on the name to view detail information.<br>
+				From there you will be able to make a donation.
+			</p>			
+			<ul class="unstyled listBorder">
+				<% @honored.each do |honored| %>
+					<li>
+						<%= link_to(image_tag(honored.avatar.url(:thumb)),
+							honored_path(id: honored.id)) %>
+					<li/>
+					<li style="margin-bottom: 50px;">
+						<%= link_to((honored.first_name + " " + honored.last_name),
+							honored_path(id: honored.id)) %>
+					<li>
+				<% end %>
+			</ul>
+			<%= will_paginate @honored, :renderer => BootstrapPagination::Rails %>
+		<% else %>
+			<p>There are not any honored in the system. Do you wish to add one?</p>
+			<% link_to "Create Honored",  new_honored_path, 
+				class: "btn btn-success btn-block" %>
+		<% end %>
+	</div>
+</div>

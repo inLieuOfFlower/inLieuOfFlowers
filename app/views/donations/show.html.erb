@@ -1,0 +1,37 @@
+<div class="row-fluid">
+	<div class="span3">
+			<%= link_to "Dashboard", dashboard_path,
+				class: "btn btn-success btn-block" %>
+	</div>
+	<div class="span8">
+		<h3>Donation</h3>
+		<ul class="unstyled">
+			<li>
+				<b>Donation Number:</b>
+				<%= @donation.id %>
+			</li>
+			<li> 
+				<b>Donor Name:</b>
+				<%= @user.first_name + " " + @user.last_name %>
+			</li>
+		</ul>
+		<% if !@donation_reciept_array.blank? %>
+			<ul class="unstyled">
+				<% @donation_reciept_array.each do |donation_detail| %>
+					<li>
+						<b>Organization:</b>
+						<%= donation_detail[:organization_name] %>
+					</li>
+					<li style="margin-bottom: 50px;">
+						<b>Amount:</b>
+						<%= donation_detail[:amount] %>
+					</li>
+				<% end %>
+				<li>
+					<b>Total Donation:</b>
+					<%= @donation_total %>
+				</li>
+			</ul>
+		<% end %>
+	</div>
+</div>

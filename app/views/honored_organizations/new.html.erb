@@ -1,0 +1,56 @@
+<div class="row-fluid">
+	<div class="span3">
+		<ul class="unstyled listBorder">
+			<li>
+				<%= link_to "Create organization", new_organization_path,
+					class: "btn btn-success btn-block"%>
+			</li>
+			<li>
+				<%= link_to "Back to honored", @honored, class: "btn btn-block btn-success" %>
+			</li>
+       		<li>
+          		<%= link_to "Dashboard", dashboard_path,
+            		class: "btn btn-success btn-block" %>
+        	</li>
+		</ul>
+	</div>
+	<div class="span8">
+		<h3>Add organizations</h3>
+		<p>
+			To add organizations to
+			<%= @honored.first_name + " " + @honored.last_name %>
+			please check the organizations you want to add and then
+			click the submit button.
+		</p>
+		<% if defined?(@organization) && !@organization.empty? %>
+      		<h3>Organization Names</h3>
+      		<p>
+        		This is a list of the organization listed within the system.
+        		
+      		</p>
+      		<%= form_for(@honored_organization, 
+      				:html => { :class => 'form-horizontal listBorder',
+      				:multipart => true }) do |f| %>
+      			<%= hidden_field_tag "honored_id", @honored.id %>
+				<ul class="unstyled">
+  					<% for organization in @organization %>
+ 		   				<li>
+ 		   					<%= check_box_tag "id_checkbox[]", organization.id %>
+ 		   					<%= organization.name %>
+ 		   				</li>
+  		 			<% end %>
+				</ul>
+				<%= will_paginate @organization, :renderer => BootstrapPagination::Rails %>
+				<%= f.submit "Submit", class: "btn btn-primary" %>
+			<% end %>
+    	<% else %>
+      		<p class="listBorder">
+      			You have either added all organizations in the system, or   			there is not any organizations available in the system. 
+      			Please add one to continue.
+      		</p>
+      		<%= link_to "Create a new organization", new_organization_path,
+      			class: "btn btn-success" %>
+    	<% end %>
+    	<%= link_to "Cancel", @honored, class: "btn btn-warning" %>
+	</div>
+</div>
